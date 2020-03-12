@@ -4,4 +4,6 @@ const PointSchema = new mongoose.Schema({
     name: String
 });
 
-module.exports = mongoose.model('Point', PointSchema);
+const Point = mongoose.model('Point', PointSchema);
+
+export default Point;
