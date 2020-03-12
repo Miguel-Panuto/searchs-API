@@ -6,4 +6,4 @@ const ConnectionSchema = new mongoose.Schema({
     cost: Number
 });
 
-module.exports = mongoose.model('Connection', ConnectionSchema);
+export default mongoose.model('Connection', ConnectionSchema);
