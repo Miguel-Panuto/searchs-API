@@ -4,8 +4,10 @@ import PointController from './controllers/PointController';
 
 const routes = Router();
 
-routes.get('/', (req, res) => res.send('ola mundo'))
+routes.get('/list-points', PointController.getPoints);
 
-routes.post('/create-point', PointController.createPoint );
+routes.post('/create-point', PointController.createPoint);
+
+routes.post('/create-connection', PointController.createConnection);
 
 export default routes;
