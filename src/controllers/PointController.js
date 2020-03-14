@@ -1,24 +1,6 @@
 const Point = require('../models/PointModel');
 const Connection = require('../models/ConnectionModel');
-
-const findPointId = async (name) => {
-    const point = await Point.findOne({ name });
-    if (point) {
-        return point._id;
-    }
-    return null;
-}
-
-const findPointConnection = async (id, cost) => {
-    const point = await Point.findById(id);
-    if (point) {
-        return {
-            name: point.name,
-            cost
-        };
-    }
-    return null;
-}
+const findPointId = require('../db/utils/findPointId');
 
 module.exports = {
     async getPoints(req, res) {
@@ -48,16 +30,4 @@ module.exports = {
         return res.status(404).send({ error: 'Not founded the points or cost' });
     },
 
-    async findConnections(point) {
-        const pointsConnected = await Connection.find({ fromId: await findPointId(point) });
-
-        if (pointsConnected.length > 0) {
-            const points = await Promise.all(pointsConnected.map(point =>
-                findPointConnection(point.toId, point.cost)
-            ));
-            return points;
-        }
-
-        return null;
-    }
 }
