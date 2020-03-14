@@ -1,6 +1,6 @@
-const Point = require('../models/PointModel');
-const Connection = require('../models/ConnectionModel');
-const findPointId = require('../db/utils/findPointId');
+const Point = require('../models/db/PointModel');
+const Connection = require('../models/db/ConnectionModel');
+const findPointId = require('../utils/db/findPointId');
 
 const findConnections = async (point) => {
 

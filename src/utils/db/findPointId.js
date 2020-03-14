@@ -1,4 +1,4 @@
-const Point = require('../../models/PointModel');
+const Point = require('../../models/db/PointModel');
 
 const findPointId = async (name) => {
     const point = await Point.findOne({ name });
