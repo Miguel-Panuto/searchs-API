@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const ConnectionSchema = new mongoose.Schema({
     fromId: String,
@@ -6,4 +6,4 @@ const ConnectionSchema = new mongoose.Schema({
     cost: Number
 });
 
-export default mongoose.model('Connection', ConnectionSchema);
+module.exports = mongoose.model('Connection', ConnectionSchema);
