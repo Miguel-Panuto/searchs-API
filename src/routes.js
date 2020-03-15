@@ -5,16 +5,16 @@ const SearchsController = require('./controllers/SearchsController');
 
 const routes = express.Router();
 
-routes.get('/list-points', PointController.getPoints);
+routes.get('/point/list', PointController.getPoints);
 
-routes.get('/list-connections', PointController.getConections);
+routes.get('/connection/list', PointController.getConections);
 
-routes.post('/create-point', PointController.createPoint);
+routes.post('/point/create', PointController.createPoint);
 
-routes.post('/create-connection', PointController.createConnection);
+routes.post('/connection/create', PointController.createConnection);
 
 
 //Routes to pick up the data on MongoDB and makes the search
-routes.get('/blind-search', SearchsController.blindSearch);
+routes.get('/search/blind/breadth-first', SearchsController.breadthFirstSearch);
 
 module.exports = routes;

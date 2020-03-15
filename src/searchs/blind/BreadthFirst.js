@@ -1,7 +1,7 @@
-const findConnections = require('../utils/db/findConnections');
-const Point = require('../models/classes/Point');
+const findConnections = require('../../utils/db/findConnections');
+const Point = require('../../models/classes/Point');
 
-const blindSearch = async (from, to) => {
+const breadthFirst = async (from, to) => {
     let line = [from]; // New line
     while (true) { 
         if (line[0] === null) // If there is no point on zero, there is an error
@@ -32,4 +32,4 @@ const blindSearch = async (from, to) => {
 
 }
 
-module.exports = blindSearch;
+module.exports = breadthFirst;
