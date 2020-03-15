@@ -3,31 +3,52 @@ const Connection = require('../models/db/ConnectionModel');
 const findPointId = require('../utils/db/findPointId');
 
 module.exports = {
-    async getPoints(req, res) {
+    async getPoints(req, res) { // This will return all the points
         return res.json(await Point.find());
     },
 
-    async createPoint(req, res) {
-        const { name } = req.body;
+    async createPoint(req, res) { // This will create a new point on database
+        const { name } = req.body; 
 
-        if (await findPointId(name)) {
-            return res.status(400).send({ error: 'Point just created' });
+        if (await findPointId(name)) { // Will verify if there is some point with the same name on database
+            return res.status(400).send({ error: 'Point just created' }); // and return an error
         }
         return res.json(await Point.create({ name }));
     },
 
-    async createConnection(req, res) {
+    async createConnection(req, res) { // This will create a point connection
         const {
             from,
             to,
             cost
-        } = req.body;
-        let fromId = await findPointId(from);
+        } = req.body; // The cost is something theorical
+
+        // The user pass the point name, and that will search his id
+        let fromId = await findPointId(from); 
         let toId = await findPointId(to);
-        if (fromId && toId && cost) {
+
+        if (fromId && toId && cost) { // That verify if user send all that is needed, or that point ins't exist
             return res.json(await Connection.create({ fromId, toId, cost }));
         }
+
+        // If not return a error
         return res.status(404).send({ error: 'Not founded the points or cost' });
     },
+
+    async getConections(req, res) { // This will search the connections and parse them
+        const connections = await Connection.find();
+
+        // That map will parse de points Id to his names
+        const parsedConnection = await Promise.all(connections.map(async point => {
+            const fromPoint = await Point.findById(point.fromId);
+            const toPoint = await Point.findById(point.toId);
+            return {
+                fromId: fromPoint.name,
+                toId: toPoint.name,
+                cost: point.cost
+            }
+        }));
+        return res.send(parsedConnection);
+    }
 
 }
