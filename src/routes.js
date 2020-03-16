@@ -17,4 +17,6 @@ routes.post('/connection/create', PointController.createConnection);
 //Routes to pick up the data on MongoDB and makes the search
 routes.get('/search/blind/breadth-first', SearchsController.breadthFirstSearch);
 
+routes.get('/search/blind/depth-first', SearchsController.depthFirstSearch);
+
 module.exports = routes;
