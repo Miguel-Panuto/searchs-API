@@ -19,4 +19,6 @@ routes.get('/search/blind/breadth-first', SearchsController.breadthFirstSearch);
 
 routes.get('/search/blind/depth-first', SearchsController.depthFirstSearch);
 
+routes.get('/search/blind/uniform-cost', SearchsController.uniformCostSearch);
+
 module.exports = routes;
