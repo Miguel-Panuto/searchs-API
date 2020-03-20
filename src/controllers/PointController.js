@@ -1,5 +1,6 @@
 const Point = require('../models/db/PointModel');
 const Connection = require('../models/db/ConnectionModel');
+const Heuristic = require('../models/db/HeuristicModel');
 const findPointId = require('../utils/db/findPointId');
 
 module.exports = {
@@ -8,7 +9,7 @@ module.exports = {
     },
 
     async createPoint(req, res) { // This will create a new point on database
-        const { name } = req.body; 
+        const { name } = req.body;
 
         if (await findPointId(name)) { // Will verify if there is some point with the same name on database
             return res.status(400).send({ error: 'Point just created' }); // and return an error
@@ -24,7 +25,7 @@ module.exports = {
         } = req.body; // The cost is something theorical
 
         // The user pass the point name, and that will search his id
-        let fromId = await findPointId(from); 
+        let fromId = await findPointId(from);
         let toId = await findPointId(to);
 
         if (fromId && toId && cost) { // That verify if user send all that is needed, or that point ins't exist
@@ -49,6 +50,27 @@ module.exports = {
             }
         }));
         return res.send(parsedConnection);
+    },
+
+    async addHeuristic(req, res) {
+        const { pointName, value } = req.body;
+        const pointId = await findPointId(pointName);
+        if (pointId) {
+            return res.json(await Heuristic.create({ pointId, value }));
+        }
+        return res.status(404).send({ error: 'Point not finded' });
+    },
+
+    async getHeuristics(req, res) {
+        const heuristicsTable = await Heuristic.find();
+        const parseHeurist = await Promise.all(heuristicsTable.map(async el => {
+            const point = await Point.findById(el.pointId);
+            return {
+                value: el.value,
+                point: point.name
+            }
+        }));
+        return res.json(parseHeurist);
     }
 
 }

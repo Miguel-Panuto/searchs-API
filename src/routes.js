@@ -9,9 +9,13 @@ routes.get('/point/list', PointController.getPoints);
 
 routes.get('/connection/list', PointController.getConections);
 
+routes.get('/heuristic/list', PointController.getHeuristics);
+
 routes.post('/point/create', PointController.createPoint);
 
 routes.post('/connection/create', PointController.createConnection);
+
+routes.post('/heuristic/add', PointController.addHeuristic);
 
 
 //Routes to pick up the data on MongoDB and makes the search
