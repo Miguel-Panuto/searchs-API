@@ -2,7 +2,7 @@ const findConnectionsHeuris = require('../../utils/db/findConnectionsHeuris');
 const Point = require('../../models/classes/Point');
 const parseSearch = require('../../utils/search/parseSearch');
 
-const greedySearch = async (from, to) => {
+const greedy = async (from, to) => {
     let line = [from];
 
     const swap = (index) => { // This is to keep the lower cost in front
@@ -32,4 +32,4 @@ const greedySearch = async (from, to) => {
     }
 }
 
-module.exports = greedySearch;
+module.exports = greedy;

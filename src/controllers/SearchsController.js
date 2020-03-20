@@ -1,8 +1,8 @@
 const Point = require('../models/classes/Point');
 const breadthFirst = require('../searchs/blind/BreadthFirst');
 const depthFirst = require('../searchs/blind/DepthFirst');
-const uniformCost = require('../searchs/blind/UniformCostSearch');
-const greedySearch = require('../searchs/heuristic/GreedySearch');
+const uniformCost = require('../searchs/blind/UniformCost');
+const greedy = require('../searchs/heuristic/Greedy');
 
 module.exports = {
 
@@ -26,7 +26,7 @@ module.exports = {
 
     async greedySearchMethod(req, res) {
         const { where, to } = req.body;
-        const point = await greedySearch(new Point(where), to);
+        const point = await greedy(new Point(where), to);
         return res.json(point);
     }
 }
