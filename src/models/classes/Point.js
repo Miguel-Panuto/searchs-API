@@ -1,9 +1,10 @@
 class Point {
-    constructor(name, cost = 0, parent = 'root') {
+    constructor(name, cost = 0, parent = 'root', heuristic = 0) {
         this.name = name;
         this.parent = parent;
         this.cost = cost;
         this.sons = [];
+        this.heuristic = heuristic;
         this.sonsCreated = false; // This will ensure that no more children will be raised
         this.haveSons = false; // And this to not remove more than necessary
     }

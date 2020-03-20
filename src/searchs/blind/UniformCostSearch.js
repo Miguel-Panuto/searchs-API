@@ -2,7 +2,6 @@ const findConnections = require('../../utils/db/findConnections');
 const Point = require('../../models/classes/Point');
 const parseSearch = require('../../utils/search/parseSearch');
 
-
 const uniformCostSearch = async (from, to) => {
     let line = [from];
 
