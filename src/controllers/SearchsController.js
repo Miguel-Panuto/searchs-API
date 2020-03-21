@@ -4,6 +4,8 @@ const depthFirst = require('../searchs/blind/DepthFirst');
 const uniformCost = require('../searchs/blind/UniformCost');
 const greedy = require('../searchs/heuristic/Greedy');
 const aStar = require('../searchs/heuristic/AStar');
+const hillFall = require('../searchs/heuristic/HillFall');
+
 
 module.exports = {
 
@@ -34,6 +36,12 @@ module.exports = {
     async aStarSearch(req, res) {
         const { where, to } = req.body;
         const point = await aStar(new Point(where), to);
+        return res.json(point);
+    },
+
+    async hillFallSearch(req, res) {
+        const { start } = req.body;
+        const point = await hillFall(start);
         return res.json(point);
     }
 }

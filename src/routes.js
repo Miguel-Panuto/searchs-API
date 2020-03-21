@@ -29,4 +29,6 @@ routes.get('/search/heuristic/greedy', SearchsController.greedySearch);
 
 routes.get('/search/heuristic/a-star', SearchsController.aStarSearch);
 
+routes.get('/search/heuristic/hill-fall', SearchsController.hillFallSearch);
+
 module.exports = routes;
