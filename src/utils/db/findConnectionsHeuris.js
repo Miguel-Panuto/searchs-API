@@ -13,7 +13,7 @@ const findConnectionsHeuris = async (point) => {
         // Parse the connections, id to the name
         const points = await Promise.all(pointsConnected.map(async ({ toId, cost }) => {
             const { name } = await Point.findById(toId);
-            const heuristic = await Heuristic.find({ pointId: toId });
+            const heuristic = await Heuristic.find({ id_point: toId });
             return {
                 name,
                 cost,

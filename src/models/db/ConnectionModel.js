@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const ConnectionSchema = new mongoose.Schema({
+    id_session: String,
     fromId: String,
     toId: String,
     cost: Number

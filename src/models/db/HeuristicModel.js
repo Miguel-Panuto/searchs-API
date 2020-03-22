@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const HeuristicSchema = new mongoose.Schema({
-    pointId: String,
+    id_session: String,
+    id_point: String,
     value: Number
 });
 

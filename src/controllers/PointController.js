@@ -54,9 +54,9 @@ module.exports = {
 
     async addHeuristic(req, res) {
         const { pointName, value } = req.body;
-        const pointId = await findPointId(pointName);
+        const id_point = await findPointId(pointName);
         if (pointId) { // Just in case if the point wasn't finded
-            return res.json(await Heuristic.create({ pointId, value }));
+            return res.json(await Heuristic.create({ id_point, value }));
         }
         return res.status(404).send({ error: 'Point not finded' });
     },
@@ -65,7 +65,7 @@ module.exports = {
         const heuristicsTable = await Heuristic.find();
         // Parse the table
         const parseHeurist = await Promise.all(heuristicsTable.map(async el => { 
-            const point = await Point.findById(el.pointId); 
+            const point = await Point.findById(el.id_point); 
             return {
                 value: el.value,
                 point: point.name
